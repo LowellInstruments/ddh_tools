@@ -1,0 +1,43 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+# Print the IP address
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+fi
+
+
+# you may need -------------------------
+#     $ sudo chmod +x /etc/rc.local
+#     $ systemctl enable rc-local
+#     $ systemctl status rc-local
+# --------------------------------------
+printf "Flagging run of rc.local...\n"
+rm /home/pi/rc-local-ran.ok || true
+touch /home/pi/rc-local-ran.ok
+
+# allow brightness adjustment for non-root users
+chmod 777 /sys/class/backlight/rpi_backlight/brightness || true
+chmod 777 /sys/class/backlight/10-0045/brightness || true
+
+
+printf "Running juice4halt script...\n"
+/home/pi/juice4halt/bin/shutdown_script.py &
+
+
+printf "Asserting RPi NTP true...\n"
+sudo timedatectl set-ntp true
+
+
+exit 0
