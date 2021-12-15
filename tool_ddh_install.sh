@@ -40,13 +40,14 @@ python3 -m venv $VENV --system-site-packages
 source $VENV/bin/activate
 $VENV/bin/pip install --upgrade pip
 $VENV/bin/pip install wheel
+$VENV/bin/pip install git+https://github.com/LowellInstruments/lowell-mat.git
+$VENV/bin/pip uninstall bluepy
 $VENV/bin/pip install git+https://github.com/LowellInstruments/bluepy.git
 
 
 
 printf '\n>> Cloning DDH source from github... \n'
 mkdir -p /home/pi/li/ddh
-# warning ---> you may want 'master' or 'v3'
 git clone https://github.com/LowellInstruments/ddh.git /home/pi/li/ddh
 $VENV/bin/pip install -r /home/pi/li/ddh/requirements.txt
 
