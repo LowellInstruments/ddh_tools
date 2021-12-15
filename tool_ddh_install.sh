@@ -24,7 +24,7 @@ if [ -d "/home/pi/li/ddh" ]; then rm -rf /home/pi/li/ddh; fi
 printf '\n>> Installing APT dependencies... \n'
 apt-get update
 apt-get -y install libatlas3-base libglib2.0-dev python3-pyqt5 libhdf5-dev python3-dev \
-    libgdal-dev libproj-dev proj-data proj-bin libgeos-dev python3-gdbm python3-venv
+    libgdal-dev libproj-dev proj-data proj-bin libgeos-dev python3-gdbm python3-venv joe
 
 
 printf '\n>> Configuring brightness and date... \n'
@@ -53,8 +53,8 @@ $VENV/bin/pip install -r /home/pi/li/ddh/requirements.txt
 
 
 printf '\n>> Ensuring good permissions... \n'
-chmod -R pi:pi /home/pi/li
-setcap 'cap_net_raw,cap_net_admin+eip' /home/pi/.local/lib/python3.7/site-packages/bluepy/bluepy-helper
+chown -R pi:pi /home/pi/li
+setcap 'cap_net_raw,cap_net_admin+eip' $VENV/lib/python3.9/site-packages/bluepy/bluepy-helper
 
 
 printf '\n>> Now you may /home/pi/li/ddh/tools/script_ddh_2_configure.sh \n'
