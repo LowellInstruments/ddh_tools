@@ -41,7 +41,7 @@ source $VENV/bin/activate
 $VENV/bin/pip install --upgrade pip
 $VENV/bin/pip install wheel
 $VENV/bin/pip install git+https://github.com/LowellInstruments/lowell-mat.git
-$VENV/bin/pip uninstall bluepy
+$VENV/bin/pip uninstall --yes bluepy
 $VENV/bin/pip install git+https://github.com/LowellInstruments/bluepy.git
 
 
@@ -54,7 +54,8 @@ $VENV/bin/pip install -r /home/pi/li/ddh/requirements.txt
 
 printf '\n>> Ensuring good permissions... \n'
 sudo chown -R pi:pi /home/pi/li
-sudo setcap 'cap_net_raw,cap_net_admin+eip' $VENV/lib/python3.9/site-packages/bluepy/bluepy-helper
+sudo setcap 'cap_net_raw,cap_net_admin+eip' $VENV/lib/python3.9/site-packages/bluepy/bluepy-helper || true
+sudo setcap 'cap_net_raw,cap_net_admin+eip' $VENV/lib/python3.7/site-packages/bluepy/bluepy-helper || true
 
 
 printf '\n>> Now you may /home/pi/li/ddh/tools/script_ddh_2_configure.sh \n'
