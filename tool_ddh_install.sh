@@ -31,8 +31,8 @@ rm -rf $VENV || true
 # need to inherit some like PyQt5 installed w/apt on Rpi
 python3 -m venv $VENV --system-site-packages
 source $VENV/bin/activate
-$VENV/bin/pip install --upgrade pip
-$VENV/bin/pip install wheel
+# $VENV/bin/pip install --upgrade pip
+# $VENV/bin/pip install wheel
 $VENV/bin/pip install git+https://github.com/LowellInstruments/lowell-mat.git
 $VENV/bin/pip uninstall --yes bluepy
 $VENV/bin/pip install git+https://github.com/LowellInstruments/bluepy.git
