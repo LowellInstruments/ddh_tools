@@ -11,6 +11,7 @@
 #
 # By default this script does nothing.
 
+
 # Print the IP address
 _IP=$(hostname -I) || true
 if [ "$_IP" ]; then
@@ -29,12 +30,21 @@ touch /home/pi/rc-local-ran.ok
 
 
 # every boot -> allow brightness adjustment for non-root users
+printf '\n>> Configuring brightness... \n'
 chmod 777 /sys/class/backlight/rpi_backlight/brightness || true
 chmod 777 /sys/class/backlight/10-0045/brightness || true
 
 
 printf "Running juice4halt script...\n"
 /home/pi/juice4halt/bin/shutdown_script.py &
+
+
+printf '\n>> Setting capabilities and permissions... \n'
+chown -R pi:pi /home/pi/li
+setcap CAP_SYS_TIME+ep /bin/date
+setcap 'cap_net_raw,cap_net_admin+eip' /usr/sbin/ifmetric
+setcap 'cap_net_raw,cap_net_admin+eip' $VENV/lib/python3.9/site-packages/bluepy/bluepy-helper || true
+setcap 'cap_net_raw,cap_net_admin+eip' $VENV/lib/python3.7/site-packages/bluepy/bluepy-helper || true
 
 
 printf "Asserting RPi NTP true...\n"
