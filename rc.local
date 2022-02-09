@@ -40,6 +40,7 @@ printf "Running juice4halt script...\n"
 
 
 printf '\n>> Setting capabilities and permissions... \n'
+VENV=/home/pi/li/venv
 chown -R pi:pi /home/pi/li
 setcap CAP_SYS_TIME+ep /bin/date
 setcap 'cap_net_raw,cap_net_admin+eip' /usr/sbin/ifmetric
