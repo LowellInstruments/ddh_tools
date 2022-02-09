@@ -25,10 +25,10 @@ sudo apt-get -y install libatlas3-base libglib2.0-dev python3-pyqt5 libhdf5-dev 
     libgdal-dev libproj-dev proj-data proj-bin libgeos-dev python3-gdbm python3-venv
 
 
+# virtualenv needs inherit some like PyQt5 installed w/apt on Rpi
 printf '\n>> Installing virtualenv... \n'
 VENV=/home/pi/li/venv
 rm -rf $VENV || true
-# need to inherit some like PyQt5 installed w/apt on Rpi
 python3 -m venv $VENV --system-site-packages
 source $VENV/bin/activate
 # $VENV/bin/pip install --upgrade pip
@@ -46,9 +46,10 @@ $VENV/bin/pip install -r /home/pi/li/ddh/requirements.txt
 
 # careful: sudo does not affect redirects, we do it smart
 printf '\n>> Installing resolv.conf...'
+sudo chattr -i /etc/resolv.conf
 sudo sh -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"
 sudo sh -c "echo 'nameserver 8.8.4.4' >> /etc/resolv.conf"
 sudo chattr +i /etc/resolv.conf
 
 
-printf '\n>> Now you may /home/pi/li/ddh/tools/script_ddh_2_configure.sh \n'
+# rc.local -> setcap date, j4halt, brightness & bluepy-helper
