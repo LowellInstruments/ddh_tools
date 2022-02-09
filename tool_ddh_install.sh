@@ -52,4 +52,4 @@ sudo sh -c "echo 'nameserver 8.8.4.4' >> /etc/resolv.conf"
 sudo chattr +i /etc/resolv.conf
 
 
-# rc.local -> setcap date, j4halt, brightness & bluepy-helper
+# also rc.local -> setcap date, j4halt, brightness & bluepy-helper
