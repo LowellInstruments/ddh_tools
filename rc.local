@@ -44,7 +44,6 @@ VENV=/home/pi/li/venv
 chown -R pi:pi /home/pi/li
 setcap CAP_SYS_TIME+ep /bin/date
 setcap 'cap_net_raw,cap_net_admin+eip' /usr/sbin/ifmetric
-setcap 'cap_net_raw,cap_net_admin+eip' $VENV/lib/python3.9/site-packages/bluepy/bluepy-helper || true
 setcap 'cap_net_raw,cap_net_admin+eip' $VENV/lib/python3.7/site-packages/bluepy/bluepy-helper || true
 
 
