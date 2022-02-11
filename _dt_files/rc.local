@@ -1,0 +1,40 @@
+#!/bin/sh -e
+
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable this script just change the execution bits.
+
+
+echo "Delete flag run of rc.local"
+rm /home/pi/rc-local-ran.ok || true
+
+
+echo 'Ensuring resolv.conf'
+chattr -i /etc/resolv.conf || true
+echo 'nameserver 8.8.8.8' > /etc/resolv.conf
+echo 'nameserver 8.8.4.4' >> /etc/resolv.conf
+sudo chattr +i /etc/resolv.conf
+
+
+echo 'Allow brightness control by non-root users'
+chmod 777 /sys/class/backlight/rpi_backlight/brightness || true
+chmod 777 /sys/class/backlight/10-0045/brightness || true
+
+
+echo "Run juice4halt script"
+/home/pi/juice4halt/bin/shutdown_script.py &
+
+
+echo 'Permissions + capabilities of date, ifmetric'
+setcap CAP_SYS_TIME+ep /bin/date
+setcap 'cap_net_raw,cap_net_admin+eip' /usr/sbin/ifmetric
+
+
+echo "Asserting RPi NTP true"
+timedatectl set-ntp true
+
+
+echo "Flagging OK run of rc.local"
+touch /home/pi/rc-local-ran.ok
