@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import pycurl
 import subprocess as sp
 from io import BytesIO
@@ -74,11 +76,11 @@ def _banner_success():
 
 
 def main(url):
-    b = _get_vessel_zip_file_from_ddh_ws(url)
-    _save_vessel_zip_file_to_disk(b)
+    #b = _get_vessel_zip_file_from_ddh_ws(url)
+    #_save_vessel_zip_file_to_disk(b)
     _unzip_vessel_zip_file()
     _check_vessel_zip_file_contents()
-    _copy_vessel_files_to_ddh_folder()
+    # _copy_vessel_files_to_ddh_folder()
     _banner_success()
 
 
