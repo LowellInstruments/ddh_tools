@@ -69,12 +69,17 @@ def _copy_vessel_files_to_ddh_folder():
     _end_if(j or r or m)
 
 
+def _banner_success():
+    print('Installing vessel: done!')
+
+
 def main(url):
     b = _get_vessel_zip_file_from_ddh_ws(url)
     _save_vessel_zip_file_to_disk(b)
     _unzip_vessel_zip_file()
     _check_vessel_zip_file_contents()
     _copy_vessel_files_to_ddh_folder()
+    _banner_success()
 
 
 if __name__ == '__main__':

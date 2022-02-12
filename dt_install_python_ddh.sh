@@ -9,7 +9,7 @@ clear && echo && set -e
 trap 'echo ‘$BASH_COMMAND’ TRAPPED! rv $?' EXIT
 
 
-read -p "\nDDH Install python: deleting folder + downloaded files. Continue (y/n)? " ch
+read -p "DDH Install python: deleting DDH folder + downloaded files. Continue (y/n)? " ch
 case "$ch" in
   y|Y ) echo "yes";; n|N ) echo "no"; exit;; * ) echo "invalid"; exit;;
 esac
@@ -30,7 +30,7 @@ $VPIP install git+https://github.com/LowellInstruments/bluepy.git
 
 printf '\nDDH Install python: cloning from github\n'
 git clone https://github.com/LowellInstruments/ddh.git $FOL
-$VPIP -r $FOL/requirements.txt
+$VPIP install -r $FOL/requirements.txt
 
 
 printf '\nDDH Install python: ensuring resolv.conf\n'
@@ -38,3 +38,6 @@ sudo chattr -i /etc/resolv.conf
 sudo sh -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"
 sudo sh -c "echo 'nameserver 8.8.4.4' >> /etc/resolv.conf"
 sudo chattr +i /etc/resolv.conf
+
+
+printf '\nDDH Install python: done!\n\n'
