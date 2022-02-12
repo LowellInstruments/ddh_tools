@@ -2,14 +2,9 @@
 ddh.lo*
 *.db
 .*.sl
-_macs_to_sn.*
 .idea/
 *.so
-*.lid
-*.csv
-*.gps
-dl_files/*
-
+*.zip
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
