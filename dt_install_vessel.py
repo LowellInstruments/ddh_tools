@@ -2,9 +2,28 @@ import pycurl
 import subprocess as sp
 from io import BytesIO
 import os
+import pathlib
+
+
+# Paths to Files and Dirs
+_PF_TMP = './tmp.zip'
+_PDV = pathlib.Path('./_vessel_files')
+_PDD = pathlib.Path('/home/pi/li/ddh')
+
+
+def _sh(s):
+    rv = sp.run(s, shell=True, stdout=sp.PIPE, stderr=sp.PIPE)
+    return rv.returncode
+
+
+def _end_if(cond):
+    if cond:
+        print('error')
+        exit(1)
 
 
 def _get_vessel_zip_file_from_ddh_ws(url: str):
+    print('getting vessel zip file\n')
     buf_io = BytesIO()
     c = pycurl.Curl()
     c.setopt(c.URL, url)
@@ -14,47 +33,51 @@ def _get_vessel_zip_file_from_ddh_ws(url: str):
     b = buf_io.getvalue()
 
     # PK means zip file mime type
-    ok = b[:2] == b'PK'
-    return ok, b
+    _end_if(b[:2] != b'PK')
+    return b
 
 
-def _save_file_to_disk(data: bytes):
-    file = open("../ddh_ws_client/tmp.zip", "wb")
+def _save_vessel_zip_file_to_disk(data: bytes):
+    print('saving zip file to disk\n')
+    os.unlink(_PF_TMP)
+    file = open(_PF_TMP, 'wb')
     rv = file.write(data)
     file.close()
-    return len(data) == rv
+    _end_if(len(data) != rv)
 
 
-def _end_if(cond):
-    if cond:
-        print('error')
-        exit(1)
+def _unzip_vessel_zip_file():
+    print('unzipping zip file -> password:')
+    # -o: overwrite
+    s = 'unzip -o {}'.format(_PF_TMP)
+    _end_if(_sh(s))
 
 
-def install_ddh_vessel_files(url):
-    print('getting zip file')
-    rv = _get_vessel_zip_file_from_ddh_ws(url)
-    _end_if(not rv[0])
+def _check_vessel_zip_file_contents():
+    print('detecting vessel files in zip\n')
+    j = os.path.exists(_PDV / 'ddh.json')
+    r = os.path.exists(_PDV / 'run_ddh.sh')
+    m = os.path.exists(_PDV / '_macs_to_SN.yml')
+    _end_if(not(j and r and m))
 
-    print('writing zip file to disk')
-    rv = _save_file_to_disk(rv[1])
-    _end_if(not rv)
 
-    print('unzipping zip file with overwriting')
-    s = 'unzip -o ./tmp.zip'
-    rv = sp.run(s, shell=True, stdout=sp.PIPE, stderr=sp.PIPE)
-    _end_if(rv.returncode)
+def _copy_vessel_files_to_ddh_folder():
+    print('installing vessel files to ddh\n')
+    j = _sh('cp {}/ddh.json {}/settings'.format(_PDV, _PDD))
+    r = _sh('cp {}/run_ddh.sh {}'.format(_PDV, _PDD))
+    m = _sh('cp {}/_macs_to_SN.yml {}/settings'.format(_PDV, _PDD))
+    _end_if(j or r or m)
 
-    print('detecting file exists')
-    rv = os.path.exists('/home/kaz/a.txt')
-    _end_if(not rv)
+
+def main(url):
+    b = _get_vessel_zip_file_from_ddh_ws(url)
+    _save_vessel_zip_file_to_disk(b)
+    _unzip_vessel_zip_file()
+    _check_vessel_zip_file_contents()
+    _copy_vessel_files_to_ddh_folder()
 
 
 if __name__ == '__main__':
-    # content zip file:
-    #     - run_ddh.json
-    #     - _macs_to_sn.yml
-    #     - ddh.json
     vessel_url = 'http://localhost:8080/files/get?ddh=mary'
-    install_ddh_vessel_files(vessel_url)
+    main(vessel_url)
 
