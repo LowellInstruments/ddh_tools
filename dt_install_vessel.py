@@ -13,6 +13,10 @@ _PDV = pathlib.Path('./_vessel_files')
 _PDD = pathlib.Path('/home/pi/li/ddh')
 
 
+def _banner_success():
+    print('Installing vessel: done!')
+
+
 def _sh(s):
     rv = sp.run(s, shell=True, stdout=sp.PIPE, stderr=sp.PIPE)
     return rv.returncode
@@ -24,19 +28,29 @@ def _end_if(cond):
         exit(1)
 
 
-def _get_vessel_zip_file_from_ddh_ws(url: str):
-    print('getting vessel zip file\n')
+def _perform_curl_by_url(url: str) -> bytes:
     buf_io = BytesIO()
     c = pycurl.Curl()
     c.setopt(c.URL, url)
     c.setopt(c.WRITEDATA, buf_io)
     c.perform()
     c.close()
-    b = buf_io.getvalue()
+    return buf_io.getvalue()
 
+
+def _list_all_vessel_zip_files_from_ddh_ws():
+    print('getting vessel zip file\n')
+    url = 'http://localhost:8080/list_vessel_files'
+    a = _perform_curl_by_url(url)
+    print(a)
+
+
+def _get_vessel_zip_file_from_ddh_ws():
+    url = 'http://localhost:8080/files/get?ddh=mary'
+    a = _perform_curl_by_url(url)
     # PK means zip file mime type
-    _end_if(b[:2] != b'PK')
-    return b
+    _end_if(a[:2] != b'PK')
+    return a
 
 
 def _save_vessel_zip_file_to_disk(data: bytes):
@@ -71,20 +85,15 @@ def _copy_vessel_files_to_ddh_folder():
     _end_if(j or r or m)
 
 
-def _banner_success():
-    print('Installing vessel: done!')
-
-
-def main(url):
-    #b = _get_vessel_zip_file_from_ddh_ws(url)
-    #_save_vessel_zip_file_to_disk(b)
-    _unzip_vessel_zip_file()
-    _check_vessel_zip_file_contents()
+def main():
+    # b = _get_vessel_zip_file_from_ddh_ws()
+    # _save_vessel_zip_file_to_disk(b)
+    # _unzip_vessel_zip_file()
+    # _check_vessel_zip_file_contents()
     # _copy_vessel_files_to_ddh_folder()
     _banner_success()
 
 
 if __name__ == '__main__':
-    vessel_url = 'http://localhost:8080/files/get?ddh=mary'
-    main(vessel_url)
-
+    # main()
+    _list_all_vessel_zip_files_from_ddh_ws()
