@@ -23,14 +23,13 @@ python3 -m venv $VENV --system-site-packages
 source $VENV/bin/activate
 $VPIP install --upgrade pip
 $VPIP install wheel
-$VPIP install git+https://github.com/LowellInstruments/lowell-mat.git
-$VPIP uninstall --yes bluepy
-$VPIP install git+https://github.com/LowellInstruments/bluepy.git
 
 
 printf '\nDDH Install python: cloning from github\n'
 git clone https://github.com/LowellInstruments/ddh.git $FOL
 $VPIP install -r $FOL/requirements.txt
+$VPIP uninstall --yes bluepy
+$VPIP install git+https://github.com/LowellInstruments/bluepy.git
 
 
 printf '\nDDH Install python: ensuring resolv.conf\n'
