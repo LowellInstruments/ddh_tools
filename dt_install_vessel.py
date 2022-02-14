@@ -12,6 +12,7 @@ URL = 'http://3.14.66.209:2341/'
 _PF_TMP = '.tmp.zip'
 _PDD = pathlib.Path('/home/pi/li/ddh')
 _PDV = pathlib.Path('_vessel_files')
+REQ_FILE_ZIP = 'example.zip'
 
 
 def _check_url():
@@ -105,8 +106,7 @@ def _copy_vessel_files_to_ddh_install_folder():
 def main():
     _check_url()
     _list_all_vessel_zip_files_from_ddh_ws()
-    s = 'example.zip'
-    b = _get_vessel_zip_file_from_ddh_ws(s)
+    b = _get_vessel_zip_file_from_ddh_ws(REQ_FILE_ZIP)
     _save_vessel_zip_file_to_disk(b)
     _unzip_vessel_zip_file()
     _check_vessel_zip_file_contents()
