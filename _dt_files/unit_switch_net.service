@@ -1,0 +1,9 @@
+[Unit]
+Description=Lowell Instruments Net switching service
+After=multi-user.target
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/python3 /home/pi/li/ddh_tools/_dt_files/switch_net_service.py
+[Install]
+WantedBy=multi-user.target

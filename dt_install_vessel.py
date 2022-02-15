@@ -100,7 +100,7 @@ def _copy_vessel_files_to_ddh_install_folder():
     r = _sh('cp {}/run_ddh.sh {}'.format(_PDV, _PDD))
     m = _sh('cp {}/_macs_to_sn.yml {}/settings'.format(_PDV, _PDD))
     # print(j, r, m)
-    _end_if(j, r, m)
+    _end_if(j or r or m)
 
 
 def main():
