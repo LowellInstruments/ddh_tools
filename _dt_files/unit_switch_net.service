@@ -4,6 +4,6 @@ After=multi-user.target
 [Service]
 Type=simple
 Restart=always
-ExecStart=/usr/bin/python3 /etc/systemd/system/switch_net_service.py
+ExecStart=/usr/bin/python3 /home/pi/li/ddh_tools/switch_net_service.py
 [Install]
 WantedBy=multi-user.target

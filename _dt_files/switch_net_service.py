@@ -41,7 +41,6 @@ def main():
 
 
 if __name__ == '__main__':
-    # see output of service -> sudo journalctl -f -u test
     # see all services -> systemctl list-units --type=service
     while 1:
         main()

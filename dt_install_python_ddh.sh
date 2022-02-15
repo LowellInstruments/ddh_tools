@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
-FOL=/home/pi/li/ddh
-VENV=/home/pi/li/venv
+LI=/home/pi/li
+FOL=$LI/ddh
+VENV=$LI/venv
 VPIP=$VENV/bin/pip
 
 
 # abort upon any error
 clear && echo && set -e
 trap 'echo ‘$BASH_COMMAND’ TRAPPED! rv $?' EXIT
+if [ $PWD != $LI ]; then echo 'wrong starting folder'; fi
 
 
 read -p "DDH Install python: deleting DDH folder + downloaded files. Continue (y/n)? " ch
@@ -43,8 +45,10 @@ printf '\nDDH Install python: LI switch_net service\n'
 sudo systemctl stop unit_switch_net.service || true
 sudo cp _dt_files/unit_switch_net.service /etc/systemd/system/
 sudo systemctl daemon-reload
-sudo systemctl enable unit_switch_net.service || true
-sudo systemctl start unit_switch_net.service || true
+sudo systemctl disable unit_switch_net.service
+sudo systemctl enable unit_switch_net.service
+sudo systemctl start unit_switch_net.service
+# see output -> sudo journalctl -f -u unit_switch_net
 
 
 printf '\nDDH Install python: done!\n\n'
