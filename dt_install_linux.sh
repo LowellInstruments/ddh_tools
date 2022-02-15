@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 LI=/home/pi/li
-FOL=$LI/ddh
+DDT=$LI/ddh_tools
 VENV=$LI/venv
 J4H=$LI/juice4halt
 
@@ -8,7 +8,7 @@ J4H=$LI/juice4halt
 # abort upon any error
 clear && echo && set -e
 trap 'echo ‘$BASH_COMMAND’ TRAPPED! rv $?' EXIT
-if [ $PWD != $LI ]; then echo 'wrong starting folder'; fi
+if [ $PWD != $DDT ]; then echo 'wrong starting folder'; fi
 
 
 printf '\nDDH Install Linux: apt dependencies\n\n'

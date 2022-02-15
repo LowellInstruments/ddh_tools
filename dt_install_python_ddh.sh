@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 LI=/home/pi/li
+DDT=$LI/ddh_tools
 FOL=$LI/ddh
 VENV=$LI/venv
 VPIP=$VENV/bin/pip
@@ -8,7 +9,7 @@ VPIP=$VENV/bin/pip
 # abort upon any error
 clear && echo && set -e
 trap 'echo ‘$BASH_COMMAND’ TRAPPED! rv $?' EXIT
-if [ $PWD != $LI ]; then echo 'wrong starting folder'; fi
+if [ $PWD != $DDT ]; then echo 'wrong starting folder'; fi
 
 
 read -p "DDH Install python: deleting DDH folder + downloaded files. Continue (y/n)? " ch
