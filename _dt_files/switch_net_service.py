@@ -41,7 +41,6 @@ def main():
 
 
 if __name__ == '__main__':
-    # see all services -> systemctl list-units --type=service
     while 1:
         main()
         time.sleep(2)
