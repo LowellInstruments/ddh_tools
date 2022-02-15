@@ -39,4 +39,12 @@ sudo sh -c "echo 'nameserver 8.8.4.4' >> /etc/resolv.conf"
 sudo chattr +i /etc/resolv.conf
 
 
+printf '\nDDH Install python: LI switch_net service\n'
+sudo systemctl stop unit_switch_net.service || true
+sudo cp _dt_files/unit_switch_net.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable unit_switch_net.service || true
+sudo systemctl start unit_switch_net.service || true
+
+
 printf '\nDDH Install python: done!\n\n'
