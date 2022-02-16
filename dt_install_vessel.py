@@ -21,7 +21,7 @@ def _check_url():
 
 
 def _banner_success():
-    print('installing vessel: done!')
+    print('done!')
 
 
 def _sh(s):
@@ -122,7 +122,7 @@ def main():
     _save_vessel_zip_file_to_disk(b)
     _unzip_vessel_zip_file()
     _check_vessel_zip_file_contents()
-    #_copy_vessel_files_to_ddh_install_folder()
+    _copy_vessel_files_to_ddh_install_folder()
     _banner_success()
 
 
