@@ -44,6 +44,7 @@ sudo setcap 'cap_net_raw,cap_net_admin+eip' $BLUEPY_HELPER
 
 
 printf '\nDDH: Install python: restoring dl_files from /tmp\n'
+mkdir $DLF || true
 cd /tmp && cp -r $TSTAMP/* $DLF
 
 
