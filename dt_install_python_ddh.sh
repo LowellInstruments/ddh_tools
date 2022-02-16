@@ -5,7 +5,7 @@ FOL=$LI/ddh
 DLF=$FOL/dl_files
 VENV=$LI/venv
 VPIP=$VENV/bin/pip
-TSTAMP=dl_files_$(date +%Y%M%d-%H%M%S)
+TSTAMP=/tmp/dl_files_$(date +%Y%M%d-%H%M%S)
 
 
 # abort upon any error
@@ -15,10 +15,10 @@ if [ $PWD != $DDT ]; then echo 'wrong starting folder'; exit 1; fi
 
 
 printf '\nDDH: Install python: backup existing dl_files to /tmp\n'
-cp -ru $DLF /tmp/"$TSTAMP"
+cp -ru $DLF $TSTAMP
 
 
-print '\nDDH Install python: uninstalling old DDH \n '
+printf '\nDDH Install python: uninstalling old DDH \n '
 rm -rf $FOL
 
 
@@ -39,7 +39,7 @@ $VPIP install git+https://github.com/LowellInstruments/bluepy.git
 
 
 printf '\nDDH: Install python: restoring dl_files from /tmp\n'
-cd /tmp && cp -r "$TSTAMP" $FOL
+cd /tmp && cp -r $TSTAMP $FOL
 
 
 printf '\nDDH Install python: ensuring resolv.conf \n'
