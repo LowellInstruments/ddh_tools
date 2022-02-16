@@ -13,7 +13,6 @@ URL = 'http://3.14.66.209:2341/'
 _PF_TMP = '.tmp.zip'
 _PDD = pathlib.Path('/home/pi/li/ddh')
 _PDV = pathlib.Path('_vessel_files')
-REQ_FILE_ZIP = 'example.zip'
 
 
 def _check_url():
@@ -110,7 +109,8 @@ def main():
     if len(sys.argv) == 1:
         return
 
-    b = _get_vessel_zip_file_from_ddh_ws(REQ_FILE_ZIP)
+    # run this from terminal
+    b = _get_vessel_zip_file_from_ddh_ws(sys.argv[1])
     _save_vessel_zip_file_to_disk(b)
     _unzip_vessel_zip_file()
     _check_vessel_zip_file_contents()
