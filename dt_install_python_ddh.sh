@@ -14,8 +14,8 @@ trap 'echo ‘$BASH_COMMAND’ TRAPPED! rv $?' EXIT
 if [ $PWD != $DDT ]; then echo 'wrong starting folder'; exit 1; fi
 
 
-printf '\nDDH: Install python: backup existing dl_files to /tmp\n'
-cp -ru $DLF $TSTAMP
+printf '\nDDH: Install python: backup existing dl_files to %s\n' "$TSTAMP"
+cp -r $DLF $TSTAMP
 
 
 printf '\nDDH Install python: uninstalling old DDH \n '
@@ -44,7 +44,7 @@ sudo setcap 'cap_net_raw,cap_net_admin+eip' $BLUEPY_HELPER
 
 
 printf '\nDDH: Install python: restoring dl_files from /tmp\n'
-cd /tmp && cp -r $TSTAMP $FOL
+cd /tmp && cp -r $TSTAMP/* $DLF
 
 
 printf '\nDDH Install python: ensuring resolv.conf \n'
