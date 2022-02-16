@@ -5,6 +5,7 @@ FOL=$LI/ddh
 DLF=$FOL/dl_files
 VENV=$LI/venv
 VPIP=$VENV/bin/pip
+TSTAMP=dl_files_$(date +%Y%M%d-%H%M%S)
 
 
 # abort upon any error
@@ -14,7 +15,6 @@ if [ $PWD != $DDT ]; then echo 'wrong starting folder'; fi
 
 
 printf '\nDDH: Install python: backup existing dl_files to /tmp\n'
-TSTAMP=dl_files_$(date +%Y%M%d-%H%M%S)
 cp -ru $DLF /tmp/"$TSTAMP"
 
 
