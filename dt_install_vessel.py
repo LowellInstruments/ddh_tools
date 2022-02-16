@@ -5,6 +5,7 @@ import subprocess as sp
 from io import BytesIO
 import os
 import pathlib
+import sys
 
 
 URL = 'http://3.14.66.209:2341/'
@@ -106,6 +107,9 @@ def _copy_vessel_files_to_ddh_install_folder():
 def main():
     _check_url()
     _list_all_vessel_zip_files_from_ddh_ws()
+    if len(sys.argv) == 1:
+        return
+
     b = _get_vessel_zip_file_from_ddh_ws(REQ_FILE_ZIP)
     _save_vessel_zip_file_to_disk(b)
     _unzip_vessel_zip_file()

@@ -38,6 +38,11 @@ $VPIP uninstall --yes bluepy
 $VPIP install git+https://github.com/LowellInstruments/bluepy.git
 
 
+printf '\nDDH Install python: bluepy permissions, also done other places \n'
+BLUEPY_HELPER=$VENV/lib/python3.7/site-packages/bluepy/bluepy-helper
+sudo setcap 'cap_net_raw,cap_net_admin+eip' $BLUEPY_HELPER
+
+
 printf '\nDDH: Install python: restoring dl_files from /tmp\n'
 cd /tmp && cp -r $TSTAMP $FOL
 
