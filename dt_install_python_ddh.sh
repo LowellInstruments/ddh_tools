@@ -11,7 +11,7 @@ TSTAMP=dl_files_$(date +%Y%M%d-%H%M%S)
 # abort upon any error
 clear && echo && set -e
 trap 'echo ‘$BASH_COMMAND’ TRAPPED! rv $?' EXIT
-if [ $PWD != $DDT ]; then echo 'wrong starting folder'; fi
+if [ $PWD != $DDT ]; then echo 'wrong starting folder'; exit 1; fi
 
 
 printf '\nDDH: Install python: backup existing dl_files to /tmp\n'
