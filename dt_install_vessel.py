@@ -103,6 +103,12 @@ def _copy_vessel_files_to_ddh_install_folder():
     _end_if(j or r or m)
 
 
+def _remove_any_previous_local_vessel_files_folder():
+    print('removing previous vessel files local folder')
+    rm = _sh('rm -rf {}'.format(str(_PDV)))
+    _end_if(rm)
+
+
 def main():
     _check_url()
     _list_all_vessel_zip_files_from_ddh_ws()
@@ -110,11 +116,12 @@ def main():
         return
 
     # run this from terminal
+    _remove_any_previous_local_vessel_files_folder()
     b = _get_vessel_zip_file_from_ddh_ws(sys.argv[1])
     _save_vessel_zip_file_to_disk(b)
     _unzip_vessel_zip_file()
     _check_vessel_zip_file_contents()
-    _copy_vessel_files_to_ddh_install_folder()
+    #_copy_vessel_files_to_ddh_install_folder()
     _banner_success()
 
 
