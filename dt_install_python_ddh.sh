@@ -43,6 +43,7 @@ BLUEPY_HELPER=$VENV/lib/python3.7/site-packages/bluepy/bluepy-helper
 sudo setcap 'cap_net_raw,cap_net_admin+eip' $BLUEPY_HELPER
 
 
+# X/. means the content excluding the folder X
 printf '\nDDH: Install python: restoring dl_files from /tmp\n'
 mkdir $DLF || true
 cp -r $TSTAMP/. $DLF
@@ -55,6 +56,7 @@ sudo sh -c "echo 'nameserver 8.8.4.4' >> /etc/resolv.conf"
 sudo chattr +i /etc/resolv.conf
 
 
+# see service output -> sudo journalctl -f -u unit_switch_net
 # printf '\nDDH Install python: LI switch_net service\n'
 # sudo systemctl stop unit_switch_net.service || true
 # sudo cp _dt_files/unit_switch_net.service /etc/systemd/system/
@@ -62,7 +64,6 @@ sudo chattr +i /etc/resolv.conf
 # sudo systemctl disable unit_switch_net.service
 # sudo systemctl enable unit_switch_net.service
 # sudo systemctl start unit_switch_net.service
-# see output -> sudo journalctl -f -u unit_switch_net
 
 
 printf '\nDDH Install python: done!\n\n'
