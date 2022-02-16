@@ -10,9 +10,10 @@ import sys
 
 URL = 'http://3.14.66.209:2341/'
 # URL = 'http://localhost:2341/'
-_PF_TMP = '.tmp.zip'
-_PDD = pathlib.Path('/home/pi/li/ddh')
-_PDV = pathlib.Path('_vessel_files')
+_PF_TMP = '/tmp/tmp.zip'
+_LI = pathlib.Path('/home/pi/li/')
+_PDD = pathlib.Path(_LI / 'ddh')
+_PDV = pathlib.Path(_LI / 'ddh_tools/_vessel_files')
 
 
 def _check_url():
