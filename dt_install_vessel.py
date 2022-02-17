@@ -8,16 +8,24 @@ import pathlib
 import sys
 
 
-URL = 'http://3.14.66.209:2341/'
-# URL = 'http://localhost:2341/'
+URL = ''
 _PF_TMP = '/tmp/tmp.zip'
 _LI = pathlib.Path('/home/pi/li/')
 _PDD = pathlib.Path(_LI / 'ddh')
 _PDV = pathlib.Path(_LI / 'ddh_tools/_vessel_files')
 
 
-def _check_url():
-    assert (URL.endswith('/'))
+def _banner_usage():
+    print('\nusage: ./dt_install_vessel.py WS_URL vessel_name.zip')
+    if len(sys.argv) != 3:
+        print('error: bad number of parameters')
+        sys.exit(1)
+
+    global URL
+    URL = sys.argv[1]
+    if not URL.endswith('/'):
+        URL += '/'
+    # URL: http://3.14.66.209:2341/
 
 
 def _banner_success():
@@ -41,13 +49,15 @@ def _perform_curl_by_url(url: str) -> bytes:
     c = pycurl.Curl()
     c.setopt(c.URL, url)
     c.setopt(c.WRITEDATA, buf_io)
+    c.setopt(c.TIMEOUT, 5)
     c.perform()
     c.close()
     return buf_io.getvalue()
 
 
 def _list_all_vessel_zip_files_from_ddh_ws():
-    print('listing vessels from web service')
+    s = 'listing vessels from web service in url {}'
+    print(s.format(URL))
     a = _perform_curl_by_url(URL)
     a = [i for i in a.split(b'$') if i]
     print('\t{}'.format(a))
@@ -111,14 +121,10 @@ def _remove_any_previous_local_vessel_files_folder():
 
 
 def main():
-    _check_url()
+    _banner_usage()
     _list_all_vessel_zip_files_from_ddh_ws()
-    if len(sys.argv) == 1:
-        return
-
-    # run this from terminal
     _remove_any_previous_local_vessel_files_folder()
-    b = _get_vessel_zip_file_from_ddh_ws(sys.argv[1])
+    b = _get_vessel_zip_file_from_ddh_ws(sys.argv[2])
     _save_vessel_zip_file_to_disk(b)
     _unzip_vessel_zip_file()
     _check_vessel_zip_file_contents()
@@ -126,8 +132,11 @@ def main():
     _banner_success()
 
 
+# ------------------------------
+# run this script from terminal
+# -------------------------------
 if __name__ == '__main__':
     try:
         main()
     except pycurl.error as ce:
-        print('connection error {}'.format(ce))
+        print('curl error {} '.format(ce))
