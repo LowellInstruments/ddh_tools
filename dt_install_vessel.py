@@ -21,11 +21,11 @@ def _banner_usage():
         print('error: bad number of parameters')
         sys.exit(1)
 
+    # URL example: http://3.14.66.209:2341/
     global URL
     URL = sys.argv[1]
     if not URL.endswith('/'):
         URL += '/'
-    # URL: http://3.14.66.209:2341/
 
 
 def _banner_success():
