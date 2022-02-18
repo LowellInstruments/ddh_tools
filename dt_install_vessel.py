@@ -16,7 +16,7 @@ _PDV = pathlib.Path(_LI / 'ddh_tools/_vessel_files')
 
 
 def _banner_usage():
-    print('\nusage: ./dt_install_vessel.py WS_URL vessel_name.zip')
+    print('\nusage: ./dt_install_vessel.py WS_URL vessel_name.zip'\n)
     if len(sys.argv) != 2 and len(sys.argv) != 3:
         print('error: bad number of parameters')
         sys.exit(1)
@@ -56,11 +56,13 @@ def _perform_curl_by_url(url: str) -> bytes:
 
 
 def _list_all_vessel_zip_files_from_ddh_ws():
-    s = 'listing vessels from web service in url {}'
+    s = 'listing vessels from Lowell web service at url {}'
     print(s.format(URL))
     a = _perform_curl_by_url(URL)
     a = [i for i in a.split(b'$') if i]
-    print('\t{}'.format(a))
+    for i in a:
+        print('\t{}'.format(i))
+    print('\n')
 
     # nothing more to do
     if len(sys.argv) == 2:
