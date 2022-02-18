@@ -16,7 +16,7 @@ _PDV = pathlib.Path(_LI / 'ddh_tools/_vessel_files')
 
 
 def _banner_usage():
-    print('\nusage: ./dt_install_vessel.py WS_URL vessel_name.zip'\n)
+    print('\nusage: ./dt_install_vessel.py WS_URL vessel_name.zip\n')
     if len(sys.argv) != 2 and len(sys.argv) != 3:
         print('error: bad number of parameters')
         sys.exit(1)
