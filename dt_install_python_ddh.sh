@@ -19,7 +19,8 @@ cp -r $DLF $TSTAMP
 
 
 printf '\nDDH Install python: uninstalling old DDH \n '
-rm -rf $FOL
+if [ -d $FOL ]; then rm -rf $FOL; fi
+
 
 
 # on RPi, venv needs to inherit PyQt5 installed via apt
