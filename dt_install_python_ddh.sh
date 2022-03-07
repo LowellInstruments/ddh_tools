@@ -23,7 +23,6 @@ printf '\nDDH Install python: uninstalling old DDH \n '
 if [ -d $FOL ]; then rm -rf $FOL; fi
 
 
-
 # on RPi, venv needs to inherit PyQt5 installed via apt
 printf '\nDDH Install python: virtualenv \n'
 rm -rf $VENV || true
