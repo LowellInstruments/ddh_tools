@@ -15,7 +15,7 @@ if [ $PWD != $DDT ]; then echo 'wrong starting folder'; exit 1; fi
 
 
 printf '\nDDH: Install python: backup existing dl_files to %s\n' "$TSTAMP"
-cp -r $DLF $TSTAMP
+if [ -d $DLF ]; then cp -r $DLF $TSTAMP; fi
 
 
 printf '\nDDH Install python: uninstalling old DDH \n '
