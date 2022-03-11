@@ -6,6 +6,7 @@ DLF=$FOL/dl_files
 VENV=$LI/venv
 VPIP=$VENV/bin/pip
 TSTAMP=/tmp/dl_files_$(date +%Y%M%d-%H%M%S)
+DONE_BAK=0
 
 
 # abort upon any error
@@ -15,11 +16,11 @@ if [ $PWD != $DDT ]; then echo 'wrong starting folder'; exit 1; fi
 
 
 printf '\nDDH: Install python: backup existing dl_files to %s\n' "$TSTAMP"
-cp -r $DLF $TSTAMP
+if [ -d $DLF ]; then cp -r $DLF $TSTAMP; DONE_BAK=1; fi
 
 
 printf '\nDDH Install python: uninstalling old DDH \n '
-rm -rf $FOL
+if [ -d $FOL ]; then rm -rf $FOL; fi
 
 
 # on RPi, venv needs to inherit PyQt5 installed via apt
@@ -45,8 +46,7 @@ sudo setcap 'cap_net_raw,cap_net_admin+eip' $BLUEPY_HELPER
 
 # X/. means the content excluding the folder X
 printf '\nDDH: Install python: restoring dl_files from /tmp\n'
-mkdir $DLF || true
-cp -r $TSTAMP/. $DLF
+if [ $DONE_BAK -eq 1 ]; then mkdir $DLF || true; cp -r $TSTAMP/. $DLF; fi
 
 
 printf '\nDDH Install python: ensuring resolv.conf \n'
