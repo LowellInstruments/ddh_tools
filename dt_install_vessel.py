@@ -98,7 +98,7 @@ def _unzip_vessel_zip_file():
 def _check_vessel_zip_file_contents():
     print('checking contents in vessel zip file')
     j = os.path.exists(str(_PDV / 'ddh.json'))
-    r = os.path.exists(str(_PDV / '_run_ddh.sh'))
+    r = os.path.exists(str(_PDV / '_ddh_run.sh'))
     m = os.path.exists(str(_PDV / '_macs_to_sn.yml'))
     # print(j, r, m)
     _end_if(not (j and r and m))
@@ -113,7 +113,7 @@ def _copy_vessel_files_to_ddh_install_folder():
     _detect_we_are_on_ddh()
     print('copying vessel files to ddh install folder')
     j = _sh('cp {}/ddh.json {}/settings'.format(_PDV, _PDD))
-    r = _sh('cp {}/_run_ddh.sh {}'.format(_PDV, _PDD))
+    r = _sh('cp {}/_ddh_run.sh {}'.format(_PDV, _PDD))
     m = _sh('cp {}/_macs_to_sn.yml {}/settings'.format(_PDV, _PDD))
     # print(j, r, m)
     _end_if(j or r or m)
