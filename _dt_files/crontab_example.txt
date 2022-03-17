@@ -1,7 +1,4 @@
-# see https://crontab.guru/every-2-minutes for examples
 
 # every minute
-* * * * *
+* * * * * pi /home/pi/li/ddh/crontab_ddh.sh
 
-# every 2 minutes
-*/2 * * * * flock -w 0 /tmp/cmd_lockfile.lock cmd
