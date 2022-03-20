@@ -57,13 +57,13 @@ sudo chattr +i /etc/resolv.conf
 
 
 # see service output -> sudo journalctl -f -u unit_switch_net
-# printf '\nDDH Install python: LI switch_net service\n'
-# sudo systemctl stop unit_switch_net.service || true
-# sudo cp _dt_files/unit_switch_net.service /etc/systemd/system/
-# sudo systemctl daemon-reload
-# sudo systemctl disable unit_switch_net.service
-# sudo systemctl enable unit_switch_net.service
-# sudo systemctl start unit_switch_net.service
+printf '\nDDH Install python: LI switch_net service\n'
+sudo systemctl stop unit_switch_net.service || true
+sudo cp $DDT/_dt_files/unit_switch_net.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl disable unit_switch_net.service
+sudo systemctl enable unit_switch_net.service
+sudo systemctl start unit_switch_net.service
 
 
 printf '\nDDH Install python: done!\n\n'
