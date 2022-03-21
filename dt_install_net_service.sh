@@ -20,3 +20,5 @@ sudo systemctl disable unit_switch_net.service
 sudo systemctl enable unit_switch_net.service
 sudo systemctl start unit_switch_net.service
 echo '-----------------------------------------'
+echo 'done DDH Install LI switch_net service!'
+echo
