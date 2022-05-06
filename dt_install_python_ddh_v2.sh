@@ -32,6 +32,7 @@ $VPIP install --upgrade pip
 $VPIP install wheel
 
 
+# todo: remove -b
 printf '\nDDH Install python: cloning from github \n'
 git clone https://github.com/LowellInstruments/ddh.git $FOL
 $VPIP install -r $FOL/requirements.txt
@@ -54,16 +55,6 @@ sudo chattr -i /etc/resolv.conf
 sudo sh -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"
 sudo sh -c "echo 'nameserver 8.8.4.4' >> /etc/resolv.conf"
 sudo chattr +i /etc/resolv.conf
-
-
-# see service output -> sudo journalctl -f -u unit_switch_net
-# printf '\nDDH Install python: LI switch_net service\n'
-# sudo systemctl stop unit_switch_net.service || true
-# sudo cp _dt_files/unit_switch_net.service /etc/systemd/system/
-# sudo systemctl daemon-reload
-# sudo systemctl disable unit_switch_net.service
-# sudo systemctl enable unit_switch_net.service
-# sudo systemctl start unit_switch_net.service
 
 
 printf '\nDDH Install python: done!\n\n'
