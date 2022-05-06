@@ -31,6 +31,7 @@ def main():
         time.sleep(2)
 
     # wi-fi, try again
+    wlan_has_via = _sh('timeout 2 ping -c 1 -I wlan0 www.google.com')
     if wlan_has_via and _sh('ip route get 8.8.8.8 | grep wlan0'):
         _p('* wi-fi *')
         time.sleep(10)
