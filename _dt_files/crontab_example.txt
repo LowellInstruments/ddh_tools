@@ -1,4 +1,0 @@
-
-# every minute
-* * * * * pi /home/pi/li/ddh/crontab_ddh.sh
-
