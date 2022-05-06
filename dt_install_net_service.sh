@@ -11,6 +11,8 @@ trap 'echo ‘$BASH_COMMAND’ TRAPPED! rv $?' EXIT
 # see service output -> sudo journalctl -f -u unit_switch_net
 echo
 echo '-----------------------------------------'
+echo 'DDH configure ifmetric permissions...'
+sudo setcap 'cap_net_raw,cap_net_admin+eip' /usr/sbin/ifmetric
 echo 'DDH Install LI switch_net service...'
 sudo systemctl stop unit_switch_net.service || true
 sudo cp $DDT/_dt_files/unit_switch_net.service /etc/systemd/system/
