@@ -32,7 +32,6 @@ $VPIP install --upgrade pip
 $VPIP install wheel
 
 
-# todo: remove -b
 printf '\nDDH Install python: cloning from github \n'
 git clone https://github.com/LowellInstruments/ddh.git $FOL -b loop
 $VPIP install -r $FOL/requirements.txt
