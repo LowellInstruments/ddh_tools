@@ -14,6 +14,12 @@ if [ "$#" -ne 1 ]; then
     echo "dt_install_avahi -> needs one parameter"
     exit 1
 fi
+LEN=$(expr length "$1")
+if [ "$LEN" -ne 7 ]; then
+    echo "parameter length must be 7"
+    exit 1
+fi
+
 SED_STR="s/host-name=.*/host-name=ddh_$1/"
 echo "setting AVAHI name as:"
 echo "    $SED_STR"
