@@ -15,7 +15,8 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 SED_STR="s/host-name=.*/host-name=ddh_$1/"
-echo "setting AVAHI name\r\nas -> $SED_STR"
+echo "setting AVAHI name as:"
+echo "    $SED_STR"
 sed -i "$SED_STR" $DDT/_dt_files/avahi-daemon.conf
 sudo cp $DDT/_dt_files/avahi-daemon.conf /etc/avahi/
 sudo systemctl restart avahi-daemon.service
