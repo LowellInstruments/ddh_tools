@@ -12,6 +12,7 @@ echo '-----------------------------------------'
 echo 'DDH setup AVAHI...'
 if [ "$#" -ne 1 ]; then
     echo "dt_install_avahi -> needs one parameter"
+    exit 1
 fi
 SED_STR="s/host-name=.*/host-name=ddh_$1/"
 echo "setting AVAHI name as -> $SED_STR"
