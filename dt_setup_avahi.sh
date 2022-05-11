@@ -28,4 +28,5 @@ sudo cp $DDT/_dt_files/avahi-daemon.conf /etc/avahi/
 sudo systemctl restart avahi-daemon.service
 echo '-----------------------------------------'
 echo 'done DDH setup AVAHI'
+echo ":) now you can ping this DDH like -> ping ddh_$1.local"
 echo
