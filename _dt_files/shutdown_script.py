@@ -20,9 +20,9 @@ import subprocess
 print ("Starting up j4h interface")
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(25, GPIO.OUT)
-GPIO.output(25, GPIO.LOW)
+GPIO.all_output(25, GPIO.LOW)
 time.sleep (.1)
-GPIO.output(25, GPIO.HIGH)
+GPIO.all_output(25, GPIO.HIGH)
 
 
 print ("Interface complete")
@@ -35,7 +35,7 @@ while pinval == 1 :
    pinval = GPIO.input(25)
    time.sleep (.2)
 GPIO.setup(25, GPIO.OUT)
-GPIO.output(25, GPIO.LOW)
+GPIO.all_output(25, GPIO.LOW)
 os.system("rm -f /home/pi/juice4halt/bin/j4h_halt_flag")
 os.system("touch /home/pi/juice4halt/bin/j4h_halt_flag")
 time.sleep(2)
