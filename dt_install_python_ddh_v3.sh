@@ -37,6 +37,7 @@ git clone https://github.com/LowellInstruments/ddh.git $FOL -b loop
 $VPIP install -r $FOL/requirements.txt
 $VPIP uninstall --yes bluepy
 $VPIP install git+https://github.com/LowellInstruments/bluepy.git
+$VPIP install -r $FOL/requirements_added.txt || true
 
 
 printf '\nDDH Install python: bluepy permissions, also done other places \n'
