@@ -7,18 +7,21 @@
 # In order to enable this script just change the execution bits.
 
 
-echo "Delete flag run of rc.local"
-rm /home/pi/rc-local-ran.ok || true
+echo 'RC_LOCAL -> delete flag run'
+rm -f /home/pi/rc-local-ran.ok || true
 
-echo 'Allow brightness control by non-root users'
+echo 'RC_LOCAL -> Allow brightness control by non-root users'
 chmod 777 /sys/class/backlight/rpi_backlight/brightness || true
 chmod 777 /sys/class/backlight/10-0045/brightness || true
 
-echo "Run juice4halt script"
+echo 'RC_LOCAL -> run juice4halt script'
 /home/pi/li/juice4halt/bin/shutdown_script.py &
 
-echo "Asserting RPi NTP true"
+echo 'RC_LOCAL -> asserting RPi NTP true'
 timedatectl set-ntp true
 
-echo "Flagging OK run of rc.local"
+echo 'RC_LOCAL -> updating mat library at boot'
+/home/pi/li/ddh_tools/dt_update_python_mat.sh
+
+echo 'RC_LOCAL -> set flag run'
 touch /home/pi/rc-local-ran.ok
