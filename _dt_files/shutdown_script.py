@@ -14,29 +14,34 @@
 import RPi.GPIO as GPIO
 import time
 import os
-import subprocess
 
 
 print ("Starting up j4h interface")
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(25, GPIO.OUT)
 GPIO.all_output(25, GPIO.LOW)
-time.sleep (.1)
-GPIO.all_output(25, GPIO.HIGH)
+time.sleep(.1)
+GPIO.output(25, GPIO.HIGH)
 
 
 print ("Interface complete")
 GPIO.setup(25, GPIO.IN)
-time.sleep (.1)
+time.sleep(.1)
 
 print ("Waiting for power to go away")
 pinval = 1
 while pinval == 1 :
-   pinval = GPIO.input(25)
-   time.sleep (.2)
+    pinval = GPIO.input(25)
+    time.sleep (.2)
+
+print("power lost")
 GPIO.setup(25, GPIO.OUT)
-GPIO.all_output(25, GPIO.LOW)
+GPIO.output(25, GPIO.LOW)
 os.system("rm -f /home/pi/juice4halt/bin/j4h_halt_flag")
 os.system("touch /home/pi/juice4halt/bin/j4h_halt_flag")
 time.sleep(2)
 os.system("sudo halt")
+
+
+
+
