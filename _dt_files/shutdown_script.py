@@ -19,7 +19,7 @@ import os
 print ("Starting up j4h interface")
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(25, GPIO.OUT)
-GPIO.all_output(25, GPIO.LOW)
+GPIO.output(25, GPIO.LOW)
 time.sleep(.1)
 GPIO.output(25, GPIO.HIGH)
 
