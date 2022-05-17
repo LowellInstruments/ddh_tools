@@ -20,8 +20,5 @@ echo 'RC_LOCAL -> run juice4halt script'
 echo 'RC_LOCAL -> asserting RPi NTP true'
 timedatectl set-ntp true
 
-echo 'RC_LOCAL -> updating mat library at boot'
-/home/pi/li/ddh_tools/dt_update_python_mat.sh
-
 echo 'RC_LOCAL -> set flag run'
 touch /home/pi/rc-local-ran.ok
