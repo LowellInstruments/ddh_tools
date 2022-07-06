@@ -22,7 +22,7 @@ def main():
     wlan_has_via = _sh('timeout 2 ping -c 1 -I wlan0 www.google.com')
     if wlan_has_via and _sh('ip route get 8.8.8.8 | grep wlan0'):
         _p('wi-fi')
-        time.sleep(10)
+        time.sleep(60)
         return
 
     # wi-fi cannot go internet, are we really using it
@@ -34,7 +34,7 @@ def main():
     wlan_has_via = _sh('timeout 2 ping -c 1 -I wlan0 www.google.com')
     if wlan_has_via and _sh('ip route get 8.8.8.8 | grep wlan0'):
         _p('* wi-fi *')
-        time.sleep(10)
+        time.sleep(60)
         return
 
     # wi-fi does NOT work, make sure we try cell
