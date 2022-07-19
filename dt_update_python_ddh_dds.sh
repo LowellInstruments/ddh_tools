@@ -22,15 +22,15 @@ cp $FOL_DDS/settings/_macs_to_sn.yml $BAK || true
 rm -rf /tmp/git || true
 FOL_DDH_GIT=/tmp/git_ddh
 FOL_DDS_GIT=/tmp/git_dds
-git clone https://github.com/lowellinstruments/ddh.git "$FOL_DDH_GIT"
-git clone https://github.com/lowellinstruments/dds.git "$FOL_DDS_GIT"
+git clone -b v4 https://github.com/lowellinstruments/ddh.git "$FOL_DDH_GIT"
+git clone -b v4 https://github.com/lowellinstruments/dds.git "$FOL_DDS_GIT"
 
 
 # restore configuration we backed up before
 cp -r $BAK/dl_files "$FOL_DDS_GIT"
 cp $BAK/_ddh_run.sh "$FOL_DDH_GIT"/scripts/_ddh_run.sh
 cp $BAK/ddh.json "$FOL_DDS"/settings
-cp $BAK/_macs_to_sn.yml "$FOL_DDS"/settings || true
+cp $BAK/_macs_to_sn.yml "$FOL_DDS"/settings 2> /dev/null || true
 
 
 # we reached here, we are doing well
