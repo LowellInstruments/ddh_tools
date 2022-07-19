@@ -23,7 +23,7 @@ rm -rf /tmp/git || true
 FOL_DDH_GIT=/tmp/git_ddh
 FOL_DDS_GIT=/tmp/git_dds
 git clone -b v4 https://github.com/lowellinstruments/ddh.git "$FOL_DDH_GIT"
-git clone -b v4 https://github.com/lowellinstruments/dds.git "$FOL_DDS_GIT"
+git clone https://github.com/lowellinstruments/dds.git "$FOL_DDS_GIT"
 
 
 # restore configuration we backed up before
