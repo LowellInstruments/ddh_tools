@@ -13,3 +13,4 @@ trap 'echo ‘$BASH_COMMAND’ TRAPPED! rv $?' EXIT
 echo; echo 'I > crontab'
 sudo cp $DDT/_dt_files/crontab /etc/crontab
 sudo chmod 644 /etc/crontab
+sudo service cron reload
