@@ -10,6 +10,6 @@ clear && echo && set -e
 trap 'echo ‘$BASH_COMMAND’ TRAPPED! rv $?' EXIT
 
 
-echo; echo 'I > crontab'
-sudo cp $DDT/_dt_files/crontab /etc/crontab
+echo; echo 'I > crontab_dis'
+sudo cp $DDT/_dt_files/crontab_dis /etc/crontab
 sudo chmod 644 /etc/crontab

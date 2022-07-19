@@ -16,5 +16,5 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 # |  |  |  |  |
 # *  *  *  *  * user-name command to be executed
 
-* * * * * pi /home/pi/li/ddh/crontab_ddh.sh
+#* * * * * pi /home/pi/li/ddh/crontab_ddh.sh
 
