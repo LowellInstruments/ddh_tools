@@ -19,7 +19,7 @@ cp $FOL_DDS/settings/_macs_to_sn.yml $BAK || true
 
 
 # try to pull DDH & DDS from git
-rm -rf /tmp/git || true
+rm -rf /tmp/git* || true
 FOL_DDH_GIT=/tmp/git_ddh
 FOL_DDS_GIT=/tmp/git_dds
 git clone -b v4 https://github.com/lowellinstruments/ddh.git "$FOL_DDH_GIT"
